@@ -26,3 +26,7 @@ type Link struct {
 	// Relation avec les clics - un lien peut avoir plusieurs clics
 	Clicks []Click `gorm:"foreignKey:LinkID" json:"clicks,omitempty"`
 }
+
+func (Link) TableName() string {
+	return "links"
+}
