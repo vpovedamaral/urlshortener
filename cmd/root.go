@@ -25,6 +25,14 @@ var Cfg *config.Config
 
 // rootCmd représente la commande de base lorsque l'on appelle l'application sans sous-commande.
 // C'est le point d'entrée principal pour Cobra.
+var RootCmd = &cobra.Command{
+	Use:   "url-shortener",
+	Short: "Un service de raccourcissement d URL avec API REST et CLI",
+	Long: `'url-shortener' est une application complète pour gérer des URLs courtes.
+Elle inclu un serveur API pour le raccourcissement et la redirection etune interface en ligne de commande pour l'administration.
+
+Utilisez 'url-shortener [command] --help' pour plus d infos sur une commande.`,
+}
 
 // Execute est le point d'entrée principal pour l'application Cobra.
 // Il est appelé depuis 'main.go'.
@@ -39,7 +47,8 @@ func Execute() {
 // avant la fonction main(). Elle est utilisée ici pour initialiser Cobra
 // et ajouter toutes les sous-commandes.
 func init() {
-	// TODO Initialiser la configuration globale avec OnInitialize
+	// Initialiser la configuration globale avec OnInitialize
+	cobra.OnInitialize(initConfig)
 
 	// IMPORTANT : Ici, nous n'appelons PAS RootCmd.AddCommand() directement
 	// pour les commandes 'server', 'create', 'stats', 'migrate'.
