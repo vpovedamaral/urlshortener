@@ -18,7 +18,7 @@ import (
 var ClickEventsChannel chan models.ClickEvent
 
 // SetupRoutes configure toutes les routes de l'API Gin et injecte les dépendances nécessaires
-func SetupRoutes(router *gin.Engine, linkService *services.LinkService) {
+func SetupRoutes(router *gin.Engine, linkService *services.LinkService, clickEventsChannel chan models.ClickEvent) {
 	// Le channel est initialisé ici.
 	if ClickEventsChannel == nil {
 		// TODO Créer le channel ici (make), il doit être bufférisé
