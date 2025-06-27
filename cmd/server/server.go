@@ -53,7 +53,7 @@ puis lance le serveur HTTP.`,
 
 		// TODO : Initialiser les services métiers.
 		// Créez des instances de LinkService et ClickService, en leur passant les repositories nécessaires.
-		linkService := services.NewLinkService(linkRepo)
+		linkService := services.NewLinkService(linkRepo, clickRepo)
 		// Laissez le log
 		log.Println("Services métiers initialisés.")
 

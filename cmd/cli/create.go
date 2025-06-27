@@ -58,7 +58,8 @@ Exemple:
 		defer sqlDB.Close()
 		// TODO : Initialiser les repositories et services nécessaires NewLinkRepository & NewLinkService
 		linkRepo := repository.NewLinkRepository(db)
-		linkService := services.NewLinkService(linkRepo)
+		clickRepo := repository.NewClickRepository(db)
+		linkService := services.NewLinkService(linkRepo, clickRepo)
 		// TODO : Appeler le LinkService et la fonction CreateLink pour créer le lien court.
 		link, err := linkService.CreateLink(longURLFlag)
 		if err != nil {
