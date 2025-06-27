@@ -11,7 +11,7 @@ type LinkRepository interface {
 	CreateLink(link *models.Link) error
 	GetLinkByShortCode(shortCode string) (*models.Link, error)
 	GetAllLinks() ([]models.Link, error)
-	CountClicksByLinkID(linkID uint) (int, error)
+	// CountClicksByLinkID(linkID uint) (int, error)
 }
 
 // TODO (fait):  GormLinkRepository est l'implémentation de LinkRepository utilisant GORM.
@@ -55,14 +55,14 @@ func (r *GormLinkRepository) GetAllLinks() ([]models.Link, error) {
 }
 
 // CountClicksByLinkID compte le nombre total de clics pour un ID de lien donné.
-func (r *GormLinkRepository) CountClicksByLinkID(linkID uint) (int, error) {
-	var count int64 // GORM retourne un int64 pour les comptes
-	// TODO 4: Utiliser GORM pour compter les enregistrements dans la table 'clicks'
-	// où 'LinkID' correspond à l'ID du lien donné.
+// func (r *GormLinkRepository) CountClicksByLinkID(linkID uint) (int, error) {
+// 	var count int64 // GORM retourne un int64 pour les comptes
+// 	// TODO 4: Utiliser GORM pour compter les enregistrements dans la table 'clicks'
+// 	// où 'LinkID' correspond à l'ID du lien donné.
 
-	err := r.db.Model(&models.Click{}).Where("link_id = ?", linkID).Count(&count).Error
-	if err != nil {
-		return 0, err
-	}
-	return int(count), nil
-}
+// 	err := r.db.Model(&models.Click{}).Where("link_id = ?", linkID).Count(&count).Error
+// 	if err != nil {
+// 		return 0, err
+// 	}
+// 	return int(count), nil
+// }

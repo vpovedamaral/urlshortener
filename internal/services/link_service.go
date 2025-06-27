@@ -22,13 +22,15 @@ const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 // Elle détient linkRepo qui est une référence vers une interface LinkRepository.
 // IMPORTANT : Le champ doit être du type de l'interface (non-pointeur).
 type LinkService struct {
-	linkRepo repository.LinkRepository
+	linkRepo  repository.LinkRepository
+	clickRepo repository.ClickRepository
 }
 
 // NewLinkService crée et retourne une nouvelle instance de LinkService.
-func NewLinkService(linkRepo repository.LinkRepository) *LinkService {
+func NewLinkService(linkRepo repository.LinkRepository, clickRepo repository.ClickRepository) *LinkService {
 	return &LinkService{
-		linkRepo: linkRepo,
+		linkRepo:  linkRepo,
+		clickRepo: clickRepo,
 	}
 }
 
@@ -120,7 +122,7 @@ func (s *LinkService) GetLinkStats(shortCode string) (*models.Link, int, error) 
 	}
 	// TODO 4: Compter le nombre de clics pour ce LinkID
 
-	clickCount, err := s.linkRepo.CountClicksByLinkID(link.ID)
+	clickCount, err := s.clickRepo.CountClicksByLinkID(link.ID)
 	if err != nil {
 		return nil, 0, fmt.Errorf("failed to count clicks: %w", err)
 	}
